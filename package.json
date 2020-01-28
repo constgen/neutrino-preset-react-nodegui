@@ -1,0 +1,77 @@
+{
+	"name": "neutrino-preset-react-nodegui",
+	"version": "0.1.0",
+	"description": "Neutrino preset for React NodeGui apps development",
+	"main": "src/index.js",
+	"author": "Constantine Genchevsky <const.gen@gmail.com>",
+	"license": "GPL-3.0",
+	"keywords": [
+		"webpack",
+		"nodegui",
+		"neutrino",
+		"preset",
+		"neutrino-preset",
+		"node",
+		"qt5"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/constgen/neutrino-preset-react-nodegui.git"
+	},
+	"bugs": {
+		"url": "https://github.com/constgen/neutrino-preset-react-nodegui/issues"
+	},
+	"homepage": "https://github.com/constgen/neutrino-preset-react-nodegui#readme",
+	"scripts": {
+		"pretest": "neutrino lint",
+		"lint": "neutrino lint --fix"
+	},
+	"dependencies": {
+		"source-map-support": "^0.5.16",
+		"@babel/core": "^7.7.7",
+		"@babel/plugin-syntax-dynamic-import": "^7.7.4",
+		"@babel/preset-env": "^7.7.7",
+		"@babel/preset-react": "^7.7.4",
+		"@babel/preset-typescript": "^7.7.7",
+		"@babel/plugin-transform-react-jsx-source": "7.8.3",
+		"@neutrinojs/banner": "9.0.0",
+		"@neutrinojs/clean": "9.0.0",
+		"@neutrinojs/compile-loader": "9.0.0",
+		"babel-loader": "^8.0.6",
+		"file-loader": "^5.0.2",
+		"fork-ts-checker-webpack-plugin": "^3.1.1",
+		"native-addon-loader": "^2.0.1",
+		"typescript": "^3.7.4",
+		"babel-merge": "^3.0.0",
+		"deepmerge": "^1.5.2",
+		"webpack-node-externals": "^1.7.2",
+		"circular-dependency-plugin": "5.2.0",
+		"webpack-shell-plugin-next": "1.1.5",
+		"smart-source-map-loader": "1.1.0",
+		"webpackbar": "4.0.0"
+	},
+	"devDependencies": {
+		"neutrino": "^9.0.0",
+		"webpack": "^4.0.0",
+		"@nodegui/react-nodegui": "^0.4.0",
+		"@nodegui/nodegui": "^0.12.1",
+		"react": "^16.0.0"
+	},
+	"peerDependencies": {
+		"neutrino": "^9.0.0",
+		"webpack": "^4.0.0",
+		"@nodegui/react-nodegui": "^0.4.0",
+		"react": "^16.0.0"
+	},
+	"files": [
+		"src",
+		"package.json",
+		"LICENSE",
+		"README.md"
+	],
+	"engines": {
+		"node": ">=10",
+		"npm": ">=5.4.0",
+		"yarn": ">=1.2.1"
+	}
+}
