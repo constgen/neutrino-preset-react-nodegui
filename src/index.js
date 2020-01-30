@@ -25,6 +25,7 @@ module.exports = function (customSettings = {}) {
 		let appName = `${name} ${version}`;
 		let defaultSettings = {
 			launcher: true,
+			sourcemaps: false,
 			title: appName
 		};
 		let settings = deepmerge(defaultSettings, customSettings);
@@ -41,7 +42,7 @@ module.exports = function (customSettings = {}) {
 		neutrino.use(dependency())
 		neutrino.use(progress({ name: `${appName} (NodeGui)` }))
 		neutrino.use(watch())
-		neutrino.use(sourcemaps())
+		neutrino.use(sourcemaps({ prod: sourcemaps }))
 		neutrino.use(start())
 		neutrino.use(revision())
 		
@@ -93,6 +94,9 @@ module.exports = function (customSettings = {}) {
 					.merge([...neutrino.options.extensions.map(ext => `.${ext}`)])
 					.merge(['.tsx', '.ts', '.js', '.jsx', '.json'])
 					.end()
+				.end()
+			.optimization
+				.minimize(prodMode)
 				.end()
 			.stats({
 				children: false,
