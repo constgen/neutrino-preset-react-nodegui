@@ -11,6 +11,7 @@ let dependency = require('./middlewares/dependency')
 let watch = require('./middlewares/watch')
 let sourcemaps = require('./middlewares/sourcemaps')
 let start = require('./middlewares/start')
+let revision = require('./middlewares/revision')
 
 module.exports = function (customSettings = {}) {
 	return function (neutrino) {
@@ -42,6 +43,7 @@ module.exports = function (customSettings = {}) {
 		neutrino.use(watch())
 		neutrino.use(sourcemaps())
 		neutrino.use(start())
+		neutrino.use(revision())
 		
 		Object.keys(neutrino.options.mains).forEach(function (key) {
 			neutrino.config
