@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+  - "12.0"
+install:
+  - npm install
+cache:
+  directories:
+  - node_modules
+script:
+  - npm test
+notifications:
+  email:
+    on_pull_requests: false
+    on_success: change
+    on_failure: change
+deploy:
+  provider: npm
+  email: "$NPM_EMAIL"
+  api_key: "$NPM_TOKEN"
+  skip_cleanup: false
+  on:
+    tags: true
+    branch: master
