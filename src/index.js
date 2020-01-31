@@ -26,6 +26,7 @@ module.exports = function (customSettings = {}) {
 		let appName = `${name} ${version}`;
 		let defaultSettings = {
 			launcher: true,
+			open: true,
 			sourcemaps: false,
 			title: appName
 		};
@@ -43,10 +44,10 @@ module.exports = function (customSettings = {}) {
 		neutrino.use(dependency())
 		neutrino.use(progress({ name: `${appName} (NodeGui)` }))
 		neutrino.use(watch())
-		neutrino.use(sourcemaps({ prod: sourcemaps }))
-		neutrino.use(start())
+		neutrino.use(sourcemaps({ prod: settings.sourcemaps }))
 		neutrino.use(revision())
 		neutrino.use(static())
+		if (settings.open) neutrino.use(start())
 		
 		Object.keys(neutrino.options.mains).forEach(function (key) {
 			neutrino.config
