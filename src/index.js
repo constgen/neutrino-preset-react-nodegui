@@ -4,7 +4,7 @@ let clean = require('@neutrinojs/clean');
 let deepmerge = require('deepmerge');
 
 let native = require('./middlewares/native')
-let images = require('./middlewares/images')
+let image = require('./middlewares/image')
 let babel = require('./middlewares/babel')
 let progress = require('./middlewares/progress')
 let dependency = require('./middlewares/dependency')
@@ -13,6 +13,8 @@ let sourcemaps = require('./middlewares/sourcemaps')
 let start = require('./middlewares/start')
 let revision = require('./middlewares/revision')
 let static = require('./middlewares/static')
+let style = require('./middlewares/style')
+let svg = require('./middlewares/svg')
 
 module.exports = function (customSettings = {}) {
 	return function (neutrino) {
@@ -38,7 +40,7 @@ module.exports = function (customSettings = {}) {
 			banner: `process.title = '${process.title}'`
 		}));
 		neutrino.use(native());
-		neutrino.use(images());
+		neutrino.use(image());
 		neutrino.use(babel({ targets: { node: NODE_VERSION } }));
 		neutrino.use(clean())
 		neutrino.use(dependency())
@@ -47,6 +49,8 @@ module.exports = function (customSettings = {}) {
 		neutrino.use(sourcemaps({ prod: settings.sourcemaps }))
 		neutrino.use(revision())
 		neutrino.use(static())
+		neutrino.use(style());
+		neutrino.use(svg());
 		if (settings.open) neutrino.use(start())
 		
 		Object.keys(neutrino.options.mains).forEach(function (key) {
@@ -72,7 +76,7 @@ module.exports = function (customSettings = {}) {
 			.target('node')
 			.node
 				.set('__filename', true)
-				.set('__dirname', true)
+				.set('__dirname', false)
 				.end()
 			.context(neutrino.options.root)
 			.output

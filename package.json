@@ -55,6 +55,9 @@
 		"smart-source-map-loader": "1.1.0",
 		"git-revision-webpack-plugin": "3.0.4",
 		"env-ci": "5.0.1",
+		"svg-url-loader": "3.0.3",
+		"css-to-string-loader": "0.1.3",
+		"css-loader": "3.4.2",
 		"webpackbar": "4.0.0"
 	},
 	"devDependencies": {
