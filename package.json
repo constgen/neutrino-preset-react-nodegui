@@ -1,6 +1,6 @@
 {
 	"name": "neutrino-preset-react-nodegui",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "Neutrino preset for React NodeGui apps development",
 	"main": "src/index.js",
 	"author": "Constantine Genchevsky <const.gen@gmail.com>",
