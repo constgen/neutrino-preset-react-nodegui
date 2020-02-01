@@ -34,6 +34,7 @@ module.exports = function (customSettings = {}) {
 		};
 		let settings = deepmerge(defaultSettings, customSettings);
 		let useLauncher = Boolean(settings.launcher);
+		let lintRule = neutrino.config.module.rules.get('lint');
 		
 		neutrino.use(banner({
 			pluginId: 'process-title',
@@ -119,5 +120,16 @@ module.exports = function (customSettings = {}) {
 				builtAt: prodMode,
 				timings: prodMode
 			})
+		
+		if (lintRule) {
+			lintRule.use('eslint').tap(options => deepmerge(options, {
+				baseConfig: {
+					env: {
+						node: true,
+						commonjs: true,
+					}
+				}
+			}));
+		}
 	};
 };
