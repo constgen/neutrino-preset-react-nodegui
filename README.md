@@ -38,6 +38,22 @@ This preset does all dirty job for setting up Webpack for you. It implements a s
 - Neutrino v9
 - React NodeGUI v0.4.0+
 - Webpack v4
+- CMake v3.1+ (https://cmake.org/install/)
+- 64 bit OS
+- Windows 7+, macOS 10.10+, Ubuntu 16.04+ and Debian 10+
+- **Make and GCC v7** on Unix or **Visual studio 2017** on Windows
+
+## Environment sutup
+
+Before installation of all necessary dependencies from NPM you need to setup to your system some tools and C++ compilers. These are:
+
+- Don't forget to upgrade Node to v12 or higher.
+- CMake 3.1 and up (Installation instructions can be found here: https://cmake.org/install/)
+- If you are on Mac o Linux make sure `make` and `gcc` are installed
+- On Ubuntu and Ubuntu-based distros it is advisable to run `sudo apt-get update`, followed by `sudo apt-get install pkg-config build-essential`
+- On Windows not always Visual studio 2017 is required
+
+They will compile [NodeGUI](https://nodegui.org/) on 'postinstall' phase. This binary file is a native module made from `Qt5` and your local `Node`. So you can control which version of NodeJS to pick if it satisfies minimal [requirements](#Requirements). You can find more details about environment setup in the [official documentation](https://react.nodegui.org/docs/guides/getting-started)
 
 ## Installation
 
