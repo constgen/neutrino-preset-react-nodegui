@@ -7,8 +7,9 @@ install:
 cache:
   directories:
   - node_modules
-# before_script:
+script: 
 #   - npm test
+  - echo "npm test temporarily disabled"
 notifications:
   email:
     on_pull_requests: false
