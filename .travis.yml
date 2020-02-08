@@ -1,9 +1,11 @@
+os: linux
+dist: bionic
 language: node_js
 node_js:
-  - "12.0"
+  - "12"
 install:
-#   - npm install
-  - npm install --only=production
+  - npm install
+  # - npm install --only=production
 cache:
   directories:
   - node_modules
