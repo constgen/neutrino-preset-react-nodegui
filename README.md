@@ -49,7 +49,7 @@ Before the installation you need to correctly setup your environment.
 
 1. Upgrade to NodeJS v12 or higher. The newest Node installer on Windows proposes to *automatically install all necessary tools* for native modules compilation. To avoid manual setup, it is highly recommended to **opt-in** to this option:
 
-![Node Installer Wizard](docs/node-installer.png)
+<img src="docs/node-installer.png" height="auto" width="350" alt="Node Installer Wizard" />
 
 2. Install CMake 3.1 or higher to your system if not already. Instructions can be found here: https://cmake.org/install/
 
