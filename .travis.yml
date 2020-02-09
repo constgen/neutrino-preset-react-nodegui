@@ -1,23 +1,27 @@
+os: linux
+dist: bionic
 language: node_js
 node_js:
-  - "12.0"
-# install:
-#   - npm install
+  - "12"
+install:
+  - npm install
 cache:
   directories:
   - node_modules
-# script:
+script: 
 #   - npm test
+  - echo "npm test temporarily disabled"
 notifications:
   email:
     on_pull_requests: false
     on_success: change
     on_failure: change
 deploy:
+  edge: true
   provider: npm
-  email: "$NPM_EMAIL"
-  api_key: "$NPM_TOKEN"
-  skip_cleanup: false
+  api_token: "$NPM_TOKEN"
+  cleanup: true
+  access: public
   on:
     tags: true
     branch: master

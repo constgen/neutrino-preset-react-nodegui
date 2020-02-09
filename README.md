@@ -8,11 +8,11 @@
 
 ## What is Neutrino?
 
-[Neutrino](https://neutrino.js.org) is a configuration engine that allows to bundle Webpack configurations or their parts as modules and publish them to NPM. Such modules usually are called presets or middlewares. They are designed to work in conjunction with Neutrino core in your project. You can design compilation, linting, testing and others configurations, and share them with others.
+[Neutrino](https://neutrino.js.org) is a configuration engine that allows to bundle Webpack configurations or their parts as modules and publish them to NPM. Such modules usually are called presets or middlewares. They are designed to work in conjunction with Neutrino core in your project. You can compose compilation, linting, testing and other configurations, and share them to developers.
 
 ## What features does this preset provide?
 
-This preset does all dirty job for setting up Webpack for you. It implements a setup for projects based on [NodeGUI and React](https://github.com/nodegui/react-nodegui).
+This preset does all dirty job for setting up Webpack for you. It implements a setup of projects based on [NodeGUI and React](https://github.com/nodegui/react-nodegui).
 
 ### Features
 
@@ -21,16 +21,16 @@ This preset does all dirty job for setting up Webpack for you. It implements a s
 - Tree-shaking to create smaller bundles
 - Hot Module Replacement enabled with source-watching during development
 - Disabled redundant `[HMR]` console messages
-- Auto-open application in development mode
+- Auto-open the application in the development mode
 - Debug console cleared on every file change. Your outdated logs will be removed
 - Webpack loaders for importing JSX components, TypeScript, CSS, images, icons and SVGs
 - User-friendly building progress bar
 - Detect and warn about circular dependencies during build time
 - Git revision information through environment variables (VERSION, COMMITHASH, BRANCH)
-- Consume external dependencies sourcemaps for better debugging during development
+- Consider external dependencies sourcemaps for better debugging during development
 - Production-optimized bundles with minification
 - Sourcemaps
-- Resolve URLs in JSX like in HTML for such elements: `img[src]`, `link[href]`, `Image[src]`
+- Resolve URLs in JSX like in HTML for these elements: `img[src]`, `link[href]`, `Image[src]`, `video[src]`, `Video[src]`, `audio[src]`
 
 ## Requirements
 
@@ -41,19 +41,27 @@ This preset does all dirty job for setting up Webpack for you. It implements a s
 - CMake v3.1+ (https://cmake.org/install/)
 - 64 bit OS
 - Windows 7+, macOS 10.10+, Ubuntu 16.04+ and Debian 10+
-- **Make and GCC v7** on Unix or **Visual studio 2017** on Windows
+- **Make and GCC v7** on Unix or **Visual Studio Build Tools 2017** on Windows
 
-## Environment sutup
+## Prerequisites
 
-Before installation of all necessary dependencies from NPM you need to setup to your system some tools and C++ compilers. These are:
+Before the installation you need to correctly setup your environment.
 
-- Don't forget to upgrade Node to v12 or higher.
-- CMake 3.1 and up (Installation instructions can be found here: https://cmake.org/install/)
-- If you are on Mac o Linux make sure `make` and `gcc` are installed
-- On Ubuntu and Ubuntu-based distros it is advisable to run `sudo apt-get update`, followed by `sudo apt-get install pkg-config build-essential`
-- On Windows not always Visual studio 2017 is required
+1. Upgrade to NodeJS v12 or higher. The newest Node installer on Windows proposes to *automatically install all necessary tools* for native modules compilation. To avoid manual setup, it is highly recommended to **opt-in** to this option:
 
-They will compile [NodeGUI](https://nodegui.org/) on 'postinstall' phase. This binary file is a native module made from `Qt5` and your local `Node`. So you can control which version of NodeJS to pick if it satisfies minimal [requirements](#Requirements). You can find more details about environment setup in the [official documentation](https://react.nodegui.org/docs/guides/getting-started)
+![Node Installer Wizard](docs/node-installer.png)
+
+2. Install CMake 3.1 or higher to your system if not already. Instructions can be found here: https://cmake.org/install/
+
+3. If you are on Mac or Linux make sure `make` and `gcc` are installed
+
+4. On Ubuntu and Ubuntu-based distros it is advisable to run `sudo apt-get update`, followed by `sudo apt-get install pkg-config build-essential`
+
+5. On Windows no extra steps are required if you did everything as suggested in the point **1**. But if you decided to setup build tools manually you have several options describe in [this documentation](https://github.com/nodejs/node-gyp#on-windows) :
+   - Install Visual Studio 2017
+   - Install Visual Studio Build Tools
+
+If everything is correct [NodeGUI](https://nodegui.org/) will be compiled on initial `npm install` (on 'postinstall' phase). You can find more details about environment setup in the [official documentation](https://react.nodegui.org/docs/guides/getting-started)
 
 ## Installation
 
@@ -102,7 +110,7 @@ module.exports = neutrino().webpack();
 
 ## Quickstart
 
-After installing Neutrino and the this preset, add a new directory named `src` in the root of the project, with a single JSX file named `index.jsx` in it. The preset cares about mounting to the native environment and hot reload configuration. You only have to export your main component that contains your application. Edit `src/index.jsx` file with the following:
+After installing Neutrino and this preset, add a new directory named `src` in the root of the project, with a single JSX file named `index.jsx` in it. The preset cares about mounting to the native environment and hot reload configuration. You only have to export your main component that refers to your application. Edit `src/index.jsx` file with the following:
 
 ```jsx
 import { Text, Window, View } from "@nodegui/react-nodegui";
@@ -175,7 +183,7 @@ The production code can be inspected with remote debugger. But the sourcemaps wi
 
 ## Hot Module Replacement
 
-As `neutrino-preset-react-nodegui` completely controls the launching of your application instance. It automatically enables Hot Module Replacement for all files during development. No extra configuration or changes in your source code are necessary. You don't need to restart the application every time files changed.
+As `neutrino-preset-react-nodegui` completely controls the launching of your application instance. It automatically enables Hot Module Replacement for all files during development. No extra configuration or changes in your source code are necessary. You don't need to restart the application every time files are changed.
 
 Using dynamic imports with `import()` will automatically create split points and hot replace those modules upon modification during development.
 
@@ -185,7 +193,7 @@ If you wish to copy files to the build directory that are not imported from appl
 
 ## Preset options
 
-You can provide custom options and have them merged with this preset's default options to easily affect how this preset builds. You can modify the preset settings from `.neutrinorc.js` by an options object.
+You can provide custom options and have them merged with this preset's default options to easily affect how this preset works. You can modify the preset settings from `.neutrinorc.js` by an options object.
 
 The following shows how you can pass an options object to the preset and override its options, showing the defaults:
 
@@ -203,17 +211,17 @@ module.exports = {
       // The process title
       title: `${packageJson.name} ${packageJson.version}`,
 
-      // Automatically open app on `npm start` and attach it to compilation process
+      // Automatically open app on `npm start` and attach it to the compilation process
       open: true
 
-      // Enables source maps in production build. Development sourcemaps are not affected and always turned on
+      // Enables source maps in the production build. Development sourcemaps are not affected and always turned on
       sourcemaps: false
     })
   ]
 };
 ```
 
-*Example: Disable auto-opening, always generate sourcemaps:*
+*Example: Disable auto-opening and always generate sourcemaps:*
 
 #### .neutrinorc.js
 
@@ -259,9 +267,9 @@ module.exports = {
 
 ### Launcher
 
-This preset wraps your application with NodeGUI renderer and Hot container. It can be configured using `launcher` property in the [preset options](#preset-options). So you don't need to think about how to mount and render your application. This is the purpose of the `neutrino-preset-react-nodegui` preset.
+This preset wraps your application with NodeGUI renderer and Hot container. It can be configured using `launcher` property in the [preset options](#preset-options). So you don't need to think about how to mount and render your application. This is completely managed by `neutrino-preset-react-nodegui` preset.
 
-If you want to completely disable the launcher you need to explicitly set the option to `false`
+If you want to **disable** the launcher you need to explicitly set the option to `false`
 
 ```js
 reactNodegui({
@@ -269,13 +277,13 @@ reactNodegui({
 })
 ```
 
-This turns your application into a regular Node.js application. You will have to call all necessary API by yourself as it is described in [NodeGUI documentation](https://react.nodegui.org/docs/guides/tutorial).
+This turns your application into a regular Node.js application. You will have to manage starting by yourself as it is described in [NodeGUI documentation](https://react.nodegui.org/docs/guides/tutorial).
 
 ## VSCode tips
 
 ### Project settings
 
-These are suggested workspace settings:
+These are suggested workspace settings for VSCode editor:
 
 #### .vscode/settings.json
 
@@ -324,9 +332,9 @@ Visual Studio Code has its own built-in debugger. You may launch and debug your 
         "sourceMaps": true
       },
       {
+        "name": "Debug",
         "type": "node",
         "request": "attach",
-        "name": "Debug",
         "port": 9229,
         "skipFiles": [
           "<node_internals>/**"
@@ -340,8 +348,24 @@ Visual Studio Code has its own built-in debugger. You may launch and debug your 
 Use this 3 tasks for different purposes
 
 - **Start** instead of `npm start`. Builds with live reloading and opens app.
-- **Open** instead of `npm run open`. Opens in the app what was built.
-- **Debug** when want to attach to a manually opened app with `--inspect` argument.
+- **Open** instead of `npm run open`. Opens what was built.
+- **Debug** when want to attach with `--inspect` flag to a manually opened app.
+
+## CI/CD tips
+
+### Travis CI
+
+To build your application in [Travis](https://travis-ci.com/) you need to configure a compatible environment. Suggested settings to make it work are
+
+#### .travis.yml
+
+```yml
+os: linux
+dist: bionic
+language: node_js
+node_js:
+  - "12"
+```
 
 [npm-image]: https://img.shields.io/npm/v/neutrino-preset-react-nodegui.svg
 [npm-downloads]: https://img.shields.io/npm/dt/neutrino-preset-react-nodegui.svg
