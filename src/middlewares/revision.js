@@ -18,8 +18,7 @@ if (inCIEnvironment) {
 
 module.exports = function () {
 	return function(neutrino){
-		let { config, options } = neutrino;
-		let { version } = options.packageJson;
+		let { version } = neutrino.options.packageJson;
 		let revisionOptions = {
 			lightweightTags: true,
 			branch: true,
@@ -28,6 +27,7 @@ module.exports = function () {
 		let VERSION;
 		let COMMITHASH;
 		let BRANCH;
+		let inGitEnvironment
 
 		try {
 			let gitRevisionPlugin = new GitRevisionPlugin(revisionOptions);
@@ -35,17 +35,22 @@ module.exports = function () {
 			VERSION = gitRevisionPlugin.version();
 			COMMITHASH = gitRevisionPlugin.commithash();
 			BRANCH = gitRevisionPlugin.branch();
+			inGitEnvironment = true
 		}
 		catch (err) {
 			VERSION = version;
 			COMMITHASH = '';
 			BRANCH = '';
+			inGitEnvironment = false
 		}
 
-		config
-			.plugin('revision')
-				.use(GitRevisionPlugin, [revisionOptions])
-				.end()
+		neutrino.config
+			.when(inGitEnvironment, function (config) {
+				config
+					.plugin('revision')
+					.use(GitRevisionPlugin, [revisionOptions])
+					.end()
+			})
 			.plugin('revision-vars')
 				.use(DefinePlugin, [{
 					'process.env.VERSION': JSON.stringify(VERSION),
