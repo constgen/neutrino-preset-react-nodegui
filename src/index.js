@@ -10,7 +10,8 @@ let progress = require('./middlewares/progress')
 let dependency = require('./middlewares/dependency')
 let watch = require('./middlewares/watch')
 let sourcemaps = require('./middlewares/sourcemaps')
-let start = require('./middlewares/start')
+let open = require('./middlewares/open')
+let pack = require('./middlewares/pack')
 let revision = require('./middlewares/revision')
 let static = require('./middlewares/static')
 let style = require('./middlewares/style')
@@ -45,14 +46,15 @@ module.exports = function (customSettings = {}) {
 		neutrino.use(babel({ targets: { node: NODE_VERSION } }));
 		neutrino.use(clean())
 		neutrino.use(dependency())
-		neutrino.use(progress({ name: `${appName} (NodeGui)` }))
+		neutrino.use(progress({ name: settings.title }))
 		neutrino.use(watch())
 		neutrino.use(sourcemaps({ prod: settings.sourcemaps }))
 		neutrino.use(revision())
 		neutrino.use(static())
 		neutrino.use(style());
 		neutrino.use(svg());
-		if (settings.open) neutrino.use(start())
+		if (settings.open) neutrino.use(open())
+		neutrino.use(pack({ name: settings.title }))
 		
 		Object.keys(neutrino.options.mains).forEach(function (key) {
 			neutrino.config
@@ -110,7 +112,7 @@ module.exports = function (customSettings = {}) {
 				children: false,
 				entrypoints: false,
 				modules: false,
-				hash: false,
+				hash: prodMode,
 				performance: true,
 				version: prodMode,
 				assets: prodMode,

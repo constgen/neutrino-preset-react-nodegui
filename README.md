@@ -68,8 +68,8 @@ If everything is correct [NodeGUI](https://nodegui.org/) will be compiled on ini
 `neutrino-preset-react-nodegui` can be installed with NPM. Inside your project, make sure `neutrino`, `webpack` and `neutrino-preset-react-nodegui` are development dependencies.
 
 ```bash
-❯ npm install --save @nodegui/nodegui @nodegui/react-nodegui react
-❯ npm install --save-dev neutrino neutrino-preset-react-nodegui webpack webpack-cli
+npm install --save @nodegui/nodegui @nodegui/react-nodegui react
+npm install --save-dev neutrino neutrino-preset-react-nodegui webpack webpack-cli
 ```
 
 Now edit your project's `package.json` to add commands for starting and building the application:
