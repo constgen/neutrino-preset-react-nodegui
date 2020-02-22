@@ -9,10 +9,13 @@ module.exports = function (customSettings = {}) {
 		let prodMode = process.env.NODE_ENV === 'production'
 		let defaultSettings = {
 			babel: {},
+			polyfills: false,
 			targets: { node: process.versions.node }
 		}
 		let settings = deepmerge(defaultSettings, customSettings)
+		const DEFAULT_COREJS = 3
 		let coreJsVersion = neutrino.getDependencyVersion('core-js')
+		let corejs = coreJsVersion ? coreJsVersion.major : DEFAULT_COREJS
 
 		neutrino.use(
 			compileLoader({
@@ -49,8 +52,8 @@ module.exports = function (customSettings = {}) {
 									targets: settings.targets,
 									spec: false,
 									modules: false,
-									useBuiltIns: coreJsVersion ? 'usage' : false,
-									...(coreJsVersion && { corejs: coreJsVersion.major })
+									useBuiltIns: settings.polyfills ? 'usage' : false,
+									...(settings.polyfills && { corejs })
 								}
 							],
 							[require.resolve('@babel/preset-typescript'), {

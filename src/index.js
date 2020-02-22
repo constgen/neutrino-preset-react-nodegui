@@ -32,7 +32,8 @@ module.exports = function (customSettings = {}) {
 			launcher: true,
 			open: true,
 			sourcemaps: false,
-			title: appName
+			title: appName,
+			polyfills: true
 		}
 		let settings = deepmerge(defaultSettings, customSettings)
 		let useLauncher = Boolean(settings.launcher)
@@ -44,7 +45,7 @@ module.exports = function (customSettings = {}) {
 		}))
 		neutrino.use(native())
 		neutrino.use(image())
-		neutrino.use(babel({ targets: { node: NODE_VERSION } }))
+		neutrino.use(babel({ targets: { node: NODE_VERSION }, polyfills: settings.polyfills }))
 		neutrino.use(clean())
 		neutrino.use(dependency())
 		neutrino.use(progress({ name: settings.title }))

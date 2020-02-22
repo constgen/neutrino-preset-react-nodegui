@@ -17,7 +17,7 @@ This preset does all dirty job for setting up Webpack for you. It implements a s
 ### Features
 
 - Zero upfront configuration necessary to start developing and building a React NodeGUI app
-- Modern Babel compilation supporting ES modules, async functions, dynamic imports, ES class properties, rest spread operators and decorators
+- Modern Babel compilation supporting ES modules, async functions, dynamic imports, ES class properties, rest spread operators and decorators and automatic polyfills bound to the platform
 - Tree-shaking to create smaller bundles
 - Hot Module Replacement enabled with source-watching during development
 - Disabled redundant `[HMR]` console messages
@@ -215,7 +215,10 @@ module.exports = {
          open: true,
 
          // Enables source maps in the production build. Development sourcemaps are not affected and always turned on
-         sourcemaps: false
+         sourcemaps: false,
+
+         // Add all necessary polyfills required to support NodeJS
+         polyfills: true
       })
    ]
 }
