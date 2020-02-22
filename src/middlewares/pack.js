@@ -1,12 +1,13 @@
 let path = require('path')
-let WebpackShellPluginNext = require('webpack-shell-plugin-next');
+
+let WebpackShellPluginNext = require('webpack-shell-plugin-next')
 
 module.exports = function (settings = {}) {
 	return function (neutrino) {
 		let name = settings.name || process.title
-		let prodMode = (process.env.NODE_ENV === 'production');
+		let prodMode = (process.env.NODE_ENV === 'production')
 		let outputPath = path.relative(neutrino.options.root, neutrino.options.output)
-		let nodeGuiPackerBin = path.resolve(require.resolve('@nodegui/packer'), '../../../../.bin/nodegui-packer');
+		let nodeGuiPackerBin = path.resolve(require.resolve('@nodegui/packer'), '../../../../.bin/nodegui-packer')
 		let initPacking = `${nodeGuiPackerBin} --init "${name}"`
 		let performPacking = `${nodeGuiPackerBin} --pack ${outputPath}`
 

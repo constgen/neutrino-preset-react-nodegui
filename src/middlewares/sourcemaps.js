@@ -1,15 +1,15 @@
-let banner = require('@neutrinojs/banner'); 
+let banner = require('@neutrinojs/banner')
 
-module.exports = function ({ prod = false, dev = true} = {}) {
+module.exports = function ({ prod = false, dev = true } = {}) {
 	return function (neutrino) {
-		let devMode = (process.env.NODE_ENV === 'development');
+		let devMode = (process.env.NODE_ENV === 'development')
 		let productionSourcemaps = prod ? 'source-map' : 'none'
 		let developmentSourcemaps = dev ? 'source-map' : 'none'
-		
+
 		neutrino.config
 			.devtool(productionSourcemaps)
 			.when(devMode, function (config) {
-				neutrino.use(banner({ pluginId: 'sourcemaps' }));
+				neutrino.use(banner({ pluginId: 'sourcemaps' }))
 				config
 					.devtool(developmentSourcemaps)
 					.output
@@ -34,9 +34,9 @@ module.exports = function ({ prod = false, dev = true} = {}) {
 								.tap(function (options) {
 									options.plugins.push(
 										require.resolve('@babel/plugin-transform-react-jsx-source')
-									);
-		
-									return options;
+									)
+
+									return options
 								})
 								.end()
 							.end()

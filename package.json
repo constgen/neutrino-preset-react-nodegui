@@ -75,6 +75,7 @@
 		"neutrino": "^9.0.0",
 		"webpack": "^4.0.0",
 		"@nodegui/react-nodegui": "^0.4.0",
+		"@nodegui/qode": "*",
 		"react": "^16.0.0"
 	},
 	"files": [

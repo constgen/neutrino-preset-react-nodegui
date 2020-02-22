@@ -1,5 +1,4 @@
-import { hot } from '@nodegui/react-nodegui';
+import { hot } from '@nodegui/react-nodegui'
+import Entry from '__entry__' // eslint-disable-line import/no-unresolved
 
-import Entry from '__entry__'
-
-export default hot(Entry);
+export default hot(Entry)

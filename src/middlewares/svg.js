@@ -1,9 +1,9 @@
 module.exports = function () {
 	return function ({ config }) {
-		let svgUrlLoader = require.resolve('svg-url-loader');
-		let prodMode = (process.env.NODE_ENV === 'production');
-		let outputhPath = prodMode ?  'images' : undefined
-		let name = prodMode ?  '[name].[hash:8].[ext]' : '[path][name].[ext]'
+		let svgUrlLoader = require.resolve('svg-url-loader')
+		let prodMode = (process.env.NODE_ENV === 'production')
+		let outputhPath = prodMode ? 'images' : undefined
+		let name = prodMode ? '[name].[hash:8].[ext]' : '[path][name].[ext]'
 
 		config.module
 			.rules.delete('svg')
@@ -14,12 +14,12 @@ module.exports = function () {
 					.set('issuer', /\.(css|less|sass|scss)$/)
 					.use('svg-css')
 						.loader(svgUrlLoader)
-						.options({ 
+						.options({
 							outputhPath,
 							name,
-							limit: 10000, 
-							noquotes: false, 
-							stripdeclarations: true 
+							limit: 10000,
+							noquotes: false,
+							stripdeclarations: true
 						})
 						.end()
 					.end()
@@ -29,6 +29,6 @@ module.exports = function () {
 						.options({ noquotes: true })
 						.end()
 					.end()
-				.end();
+				.end()
 	}
-};
+}

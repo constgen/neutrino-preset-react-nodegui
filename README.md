@@ -30,7 +30,7 @@ This preset does all dirty job for setting up Webpack for you. It implements a s
 - Consider external dependencies sourcemaps for better debugging during development
 - Production-optimized bundles with minification
 - Sourcemaps
-- Resolve URLs in JSX like in HTML for these elements: `img[src]`, `link[href]`, `Image[src]`, `video[src]`, `Video[src]`, `audio[src]`
+- Resolve URLs in JSX like in HTML for these elements: `img[src]`, `link[href]`, `Image[src]`, `video[src]`, `Video[src]`, `audio[src]`, `Audio[src]`
 
 ## Requirements
 
@@ -87,21 +87,21 @@ Now edit your project's `package.json` to add commands for starting and building
 Then add the new file `.neutrinorc.js` in the root of the project:
 
 ```js
-let reactNodegui = require('neutrino-preset-react-nodegui');
+let reactNodegui = require('neutrino-preset-react-nodegui')
 
 module.exports = {
-  use: [
-    reactNodegui()
-  ]
-};
+   use: [
+      reactNodegui()
+   ]
+}
 ```
 
 And create a `webpack.config.js` file in the root of the project, that uses the Neutrino API to access the generated webpack config:
 
 ```js
-let neutrino = require('neutrino');
+let neutrino = require('neutrino')
 
-module.exports = neutrino().webpack();
+module.exports = neutrino().webpack()
 ```
 
 ## Project Layout
@@ -113,8 +113,8 @@ module.exports = neutrino().webpack();
 After installing Neutrino and this preset, add a new directory named `src` in the root of the project, with a single JSX file named `index.jsx` in it. The preset cares about mounting to the native environment and hot reload configuration. You only have to export your main component that refers to your application. Edit `src/index.jsx` file with the following:
 
 ```jsx
-import { Text, Window, View } from "@nodegui/react-nodegui";
-import React from "react";
+import { Text, Window, View } from '@nodegui/react-nodegui'
+import React from 'react'
 
 const styleSheet = `
   #header {
@@ -122,22 +122,20 @@ const styleSheet = `
     padding-top: 20px;
     qproperty-alignment: 'AlignHCenter';
   }
-`;
+`
 
-export default class extends React.Component {
-  render() {
-    return (
+export default function App () {
+   return (
       <Window
-        windowTitle="Hello world"
-        minSize={{ width: 500, height: 300 }}
-        styleSheet={styleSheet}
+         windowTitle="Hello world"
+         minSize={{ width: 500, height: 300 }}
+         styleSheet={styleSheet}
       >
-        <View>
-          <Text id="header">I am a C++ programmer</Text>
-        </View>
+         <View>
+            <Text id="header">I am a C++ programmer</Text>
+         </View>
       </Window>
-    );
-  }
+   )
 }
 ```
 
@@ -200,25 +198,25 @@ The following shows how you can pass an options object to the preset and overrid
 #### .neutrinorc.js
 
 ```js
-let reactNodegui = require('neutrino-preset-react-nodegui');
+let reactNodegui = require('neutrino-preset-react-nodegui')
 
 module.exports = {
-  use: [
-    reactNodegui({
+   use: [
+      reactNodegui({
       // Inject an application startup launcher. When `false` you need to setup mounting and HMR in your sorce code
-      launcher: true,
+         launcher: true,
 
-      // The process title
-      title: `${packageJson.name} ${packageJson.version}`,
+         // The process title
+         title: `${packageJson.name} ${packageJson.version}`,
 
-      // Automatically open app on `npm start` and attach it to the compilation process
-      open: true
+         // Automatically open app on `npm start` and attach it to the compilation process
+         open: true,
 
-      // Enables source maps in the production build. Development sourcemaps are not affected and always turned on
-      sourcemaps: false
-    })
-  ]
-};
+         // Enables source maps in the production build. Development sourcemaps are not affected and always turned on
+         sourcemaps: false
+      })
+   ]
+}
 ```
 
 *Example: Disable auto-opening and always generate sourcemaps:*
@@ -226,16 +224,16 @@ module.exports = {
 #### .neutrinorc.js
 
 ```js
-let reactNodegui = require('neutrino-preset-react-nodegui');
+let reactNodegui = require('neutrino-preset-react-nodegui')
 
 module.exports = {
-  use: [
-    reactNodegui({
-      sourcemaps: true,
-      open: false
-    })
-  ]
-};
+   use: [
+      reactNodegui({
+         sourcemaps: true,
+         open: false
+      })
+   ]
+}
 ```
 
 ## Customizing
@@ -251,18 +249,18 @@ By default Neutrino, and therefore this preset, creates a single **main** `index
 You can customize a single entry point in your `.neutrinorc.js` and override a default one
 
 ```js
-let reactNodegui = require('neutrino-preset-react-nodegui');
+let reactNodegui = require('neutrino-preset-react-nodegui')
 
 module.exports = {
-  options: {
+   options: {
       mains: {
          index: './App.jsx'
       }
-  },
-  use: [
-    reactNodegui()
-  ]
-};
+   },
+   use: [
+      reactNodegui()
+   ]
+}
 ```
 
 ### Launcher
@@ -273,7 +271,7 @@ If you want to **disable** the launcher you need to explicitly set the option to
 
 ```js
 reactNodegui({
-  launcher: false
+   launcher: false
 })
 ```
 

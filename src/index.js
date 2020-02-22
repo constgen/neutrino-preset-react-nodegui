@@ -1,7 +1,8 @@
 let path = require('path')
-let banner = require('@neutrinojs/banner');
-let clean = require('@neutrinojs/clean');
-let deepmerge = require('deepmerge');
+
+let banner = require('@neutrinojs/banner')
+let clean = require('@neutrinojs/clean')
+let deepmerge = require('deepmerge')
 
 let native = require('./middlewares/native')
 let image = require('./middlewares/image')
@@ -13,67 +14,67 @@ let sourcemaps = require('./middlewares/sourcemaps')
 let open = require('./middlewares/open')
 let pack = require('./middlewares/pack')
 let revision = require('./middlewares/revision')
-let static = require('./middlewares/static')
+let staticFiles = require('./middlewares/static-files')
 let style = require('./middlewares/style')
 let svg = require('./middlewares/svg')
 
 module.exports = function (customSettings = {}) {
 	return function (neutrino) {
 		const NODE_VERSION = '12'
-		const NODE_MODULES = path.resolve(__dirname, '../node_modules');
-		const PROJECT_NODE_MODULES = path.resolve(process.cwd(), 'node_modules');
-		const LAUNCHER_PATH = path.resolve(__dirname, './launcher.js');
-		let devMode = (process.env.NODE_ENV === 'development');
-		let prodMode = (process.env.NODE_ENV === 'production');
-		let { name, version } = neutrino.options.packageJson;
-		let appName = `${name} ${version}`;
+		let nodeModulesPath = path.resolve(__dirname, '../node_modules')
+		let projectNodeModulesPath = path.resolve(process.cwd(), 'node_modules')
+		let launcherPath = path.resolve(__dirname, './launcher.js')
+		let devMode = (process.env.NODE_ENV === 'development')
+		let prodMode = (process.env.NODE_ENV === 'production')
+		let { name, version } = neutrino.options.packageJson
+		let appName = `${name} ${version}`
 		let defaultSettings = {
 			launcher: true,
 			open: true,
 			sourcemaps: false,
 			title: appName
-		};
-		let settings = deepmerge(defaultSettings, customSettings);
-		let useLauncher = Boolean(settings.launcher);
-		let lintRule = neutrino.config.module.rules.get('lint');
-		
+		}
+		let settings = deepmerge(defaultSettings, customSettings)
+		let useLauncher = Boolean(settings.launcher)
+		let lintRule = neutrino.config.module.rules.get('lint')
+
 		neutrino.use(banner({
 			pluginId: 'process-title',
 			banner: `process.title = '${process.title}'`
-		}));
-		neutrino.use(native());
-		neutrino.use(image());
-		neutrino.use(babel({ targets: { node: NODE_VERSION } }));
+		}))
+		neutrino.use(native())
+		neutrino.use(image())
+		neutrino.use(babel({ targets: { node: NODE_VERSION } }))
 		neutrino.use(clean())
 		neutrino.use(dependency())
 		neutrino.use(progress({ name: settings.title }))
 		neutrino.use(watch())
 		neutrino.use(sourcemaps({ prod: settings.sourcemaps }))
 		neutrino.use(revision())
-		neutrino.use(static())
-		neutrino.use(style());
-		neutrino.use(svg());
+		neutrino.use(staticFiles())
+		neutrino.use(style())
+		neutrino.use(svg())
 		if (settings.open) neutrino.use(open())
 		neutrino.use(pack({ name: settings.title }))
-		
+
 		Object.keys(neutrino.options.mains).forEach(function (key) {
 			neutrino.config
 				.entry(key)
 					.when(useLauncher, function (entry) {
-						entry.clear().add(LAUNCHER_PATH);
+						entry.clear().add(launcherPath)
 					})
 					.when(useLauncher && devMode, function (entry) {
-						entry.add(`${require.resolve('webpack/hot/poll')}?1000`);
+						entry.add(`${require.resolve('webpack/hot/poll')}?1000`)
 					})
 					.end()
 				.resolve.alias
 					.when(useLauncher, function (alias) {
-						alias.set('__entry__', path.resolve(__dirname, neutrino.options.mains[key].entry));
+						alias.set('__entry__', path.resolve(__dirname, neutrino.options.mains[key].entry))
 					})
 					.when(useLauncher && devMode, function (alias) {
-						alias.set('webpack/hot/log', require.resolve('webpack/hot/log'));
-					});
-		});
+						alias.set('webpack/hot/log', require.resolve('webpack/hot/log'))
+					})
+		})
 
 		neutrino.config
 			.target('node')
@@ -90,14 +91,14 @@ module.exports = function (customSettings = {}) {
 			.resolveLoader
 				.modules
 					.add('node_modules')
-					.add(NODE_MODULES)
-					.add(PROJECT_NODE_MODULES)
+					.add(nodeModulesPath)
+					.add(projectNodeModulesPath)
 					.end()
 				.end()
 			.resolve
 				.modules
-					.add(NODE_MODULES)
-					.add(PROJECT_NODE_MODULES)
+					.add(nodeModulesPath)
+					.add(projectNodeModulesPath)
 					.end()
 				.extensions
 					.merge(['.wasm'])
@@ -122,7 +123,7 @@ module.exports = function (customSettings = {}) {
 				builtAt: prodMode,
 				timings: prodMode
 			})
-		
+
 		if (lintRule) {
 			lintRule.use('eslint').tap(options => deepmerge(options, {
 				baseConfig: {
@@ -131,7 +132,7 @@ module.exports = function (customSettings = {}) {
 						commonjs: true
 					}
 				}
-			}));
+			}))
 		}
-	};
-};
+	}
+}

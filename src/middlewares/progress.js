@@ -1,12 +1,13 @@
-let WebpackBar = require('webpackbar');
+let WebpackBar = require('webpackbar')
 
 module.exports = function (settings = {}) {
 	return function (neutrino) {
 		let name = settings.name || process.title
+
 		neutrino.config
 			.plugin('progress')
 				.use(WebpackBar, [{
-					name: name,
+					name,
 					color: 'green',
 					profile: false
 

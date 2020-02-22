@@ -7,7 +7,7 @@ module.exports = function () {
 					.use('native-addon')
 						.loader(require.resolve('native-addon-loader'))
 						.options({
-							name: "[name]-[hash].[ext]"
+							name: '[name]-[hash].[ext]'
 						})
 						.end()
 					.end()

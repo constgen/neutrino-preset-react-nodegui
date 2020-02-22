@@ -1,10 +1,10 @@
-let path = require('path') 
+let path = require('path')
 
 let copy = require('@neutrinojs/copy')
 
 module.exports = function () {
 	return function (neutrino) {
-		let staticDir = path.join(neutrino.options.source, 'static');
+		let staticDir = path.join(neutrino.options.source, 'static')
 
 		neutrino.use(copy({
 			patterns: [{
@@ -12,6 +12,6 @@ module.exports = function () {
 			  from: '**/*',
 			  to: path.basename(staticDir)
 			}]
-		 }));
+		 }))
 	}
 }

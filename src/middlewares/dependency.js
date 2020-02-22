@@ -1,4 +1,4 @@
-let CircularDependencyPlugin = require('circular-dependency-plugin');
+let CircularDependencyPlugin = require('circular-dependency-plugin')
 
 module.exports = function () {
 	return function (neutrino) {
