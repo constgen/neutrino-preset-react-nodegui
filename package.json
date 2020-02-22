@@ -23,8 +23,9 @@
 	},
 	"homepage": "https://github.com/constgen/neutrino-preset-react-nodegui#readme",
 	"scripts": {
-		"pretest": "neutrino lint",
-		"lint": "neutrino lint --fix"
+		"eslint": "eslint ./ --ext .js,.jsx,.html,.md --max-warnings 0",
+		"pretest": "npm run eslint",
+		"lint": "npm run eslint -- --fix"
 	},
 	"dependencies": {
 		"@babel/core": "^7.7.7",
@@ -66,7 +67,9 @@
 		"webpack": "^4.0.0",
 		"@nodegui/react-nodegui": "^0.4.0",
 		"@nodegui/nodegui": "^0.12.1",
-		"react": "^16.0.0"
+		"react": "^16.0.0",
+		"eslint": "6.8.0",
+		"@constgen/eslint": "1.0.0"
 	},
 	"peerDependencies": {
 		"neutrino": "^9.0.0",

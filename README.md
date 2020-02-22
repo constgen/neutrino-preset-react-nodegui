@@ -367,6 +367,13 @@ node_js:
   - "12"
 ```
 
+## Knoledge base
+
+- [Qt Quick QML Types](https://doc.qt.io/qt-5/qtquick-qmlmodule.html)
+- [The Style Sheet Syntax](https://doc.qt.io/qt-5/stylesheet-syntax.html)
+- [Qt Style Sheets Examples](https://doc.qt.io/qt-5/stylesheet-examples.html)
+- [Qt Style Sheets Reference](https://doc.qt.io/qt-5/stylesheet-reference.html)
+
 [npm-image]: https://img.shields.io/npm/v/neutrino-preset-react-nodegui.svg
 [npm-downloads]: https://img.shields.io/npm/dt/neutrino-preset-react-nodegui.svg
 [npm-url]: https://npmjs.org/package/neutrino-preset-react-nodegui

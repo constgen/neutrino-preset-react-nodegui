@@ -128,7 +128,7 @@ module.exports = function (customSettings = {}) {
 				baseConfig: {
 					env: {
 						node: true,
-						commonjs: true,
+						commonjs: true
 					}
 				}
 			}));
