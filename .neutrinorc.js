@@ -19,7 +19,8 @@ module.exports = {
 									'componentDidCatch',
 									'getSnapshotBeforeUpdate'
 								]
-							}]
+							}],
+							'node/no-unpublished-import': 'off'
 						}
 					}
 				]

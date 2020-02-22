@@ -106,7 +106,7 @@ module.exports = neutrino().webpack()
 
 ## Project Layout
 
-`neutrino-preset-react-nodegui` follows the standard [project layout](https://neutrino.js.org/project-layout) specified by Neutrino. This means that by default all project source code should live in a directory named `src` in the root of the project. This includes JavaScript files, stylesheets, images, and any other assets that would be available to your compiled project. Only files explicitly imported or lazy loaded to your project will be bundled.
+`neutrino-preset-react-nodegui` follows the standard [project layout](https://neutrino.js.org/project-layout) specified by Neutrino. This means that by default all project source code should live in a directory named `src` in the root of the project. This includes JavaScript files, stylesheets, images, and any other assets that would be available to your compiled project. Only files explicitly imported or lazy loaded to your project will be bundled. You may use JavaScript or TypeScript for development. The entry file may be any of both: `src/index.jsx` or `src/index.tsx`
 
 ## Quickstart
 
@@ -190,6 +190,22 @@ Using dynamic imports with `import()` will automatically create split points and
 ## Static assets
 
 If you wish to copy files to the build directory that are not imported from application code, you can place them in a directory within `src` called `static`. All files in this directory will be copied from `src/static` to `build/static`.
+
+## Styles
+
+As QT uses its [own propriatary stylesheet syntax](https://doc.qt.io/qt-5/stylesheet-syntax.html) this preset supports loading CSS as a string. You can use it like this
+
+```jsx
+import { View, Text } from '@nodegui/react-nodegui'
+
+import styles from './styles.css'
+
+let element = (
+   <View styleSheet={styles}>
+      <Text id="header">I am a C++ programmer</Text>
+   </View>
+)
+```
 
 ## Preset options
 
