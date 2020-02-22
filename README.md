@@ -124,18 +124,20 @@ const styleSheet = `
   }
 `
 
-export default function App () {
-   return (
-      <Window
-         windowTitle="Hello world"
-         minSize={{ width: 500, height: 300 }}
-         styleSheet={styleSheet}
-      >
-         <View>
-            <Text id="header">I am a C++ programmer</Text>
-         </View>
-      </Window>
-   )
+export default class App extends React.Component {
+   render () {
+      return (
+         <Window
+            windowTitle="Hello world"
+            minSize={{ width: 500, height: 300 }}
+            styleSheet={styleSheet}
+         >
+            <View>
+               <Text id="header">I am a C++ programmer</Text>
+            </View>
+         </Window>
+      )
+   }
 }
 ```
 

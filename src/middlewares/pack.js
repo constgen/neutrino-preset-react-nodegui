@@ -4,11 +4,14 @@ let WebpackShellPluginNext = require('webpack-shell-plugin-next')
 
 module.exports = function (settings = {}) {
 	return function (neutrino) {
+		const SPACE = /\s/g
+		const UNDERSCORE = '_'
 		let name = settings.name || process.title
+		let safeName = name.replace(SPACE, UNDERSCORE)
 		let prodMode = (process.env.NODE_ENV === 'production')
 		let outputPath = path.relative(neutrino.options.root, neutrino.options.output)
 		let nodeGuiPackerBin = path.resolve(require.resolve('@nodegui/packer'), '../../../../.bin/nodegui-packer')
-		let initPacking = `${nodeGuiPackerBin} --init "${name}"`
+		let initPacking = `${nodeGuiPackerBin} --init "${safeName}"`
 		let performPacking = `${nodeGuiPackerBin} --pack ${outputPath}`
 
 		neutrino.config
