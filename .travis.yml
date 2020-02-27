@@ -9,11 +9,9 @@ cache:
   directories:
   - node_modules
 script: 
-#   - npm test
-  - echo "npm test temporarily disabled"
+  - npm test
 notifications:
   email:
-    on_pull_requests: false
     on_success: change
     on_failure: change
 deploy:

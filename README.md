@@ -17,7 +17,8 @@ This preset does all dirty job for setting up Webpack for you. It implements a s
 ### Features
 
 - Zero upfront configuration necessary to start developing and building a React NodeGUI app
-- Modern Babel compilation supporting ES modules, async functions, dynamic imports, ES class properties, rest spread operators and decorators and automatic polyfills bound to the platform
+- Modern Babel compilation supporting ES modules, async functions, dynamic imports, ES class properties, rest spread operators, decorators and automatic polyfills bound to the platform
+- Sourcemaps
 - Tree-shaking to create smaller bundles
 - Hot Module Replacement enabled with source-watching during development
 - Disabled redundant `[HMR]` console messages
@@ -29,7 +30,6 @@ This preset does all dirty job for setting up Webpack for you. It implements a s
 - Git revision information through environment variables (VERSION, COMMITHASH, BRANCH)
 - Consider external dependencies sourcemaps for better debugging during development
 - Production-optimized bundles with minification
-- Sourcemaps
 - Resolve URLs in JSX like in HTML for these elements: `img[src]`, `link[href]`, `Image[src]`, `video[src]`, `Video[src]`, `audio[src]`, `Audio[src]`
 
 ## Requirements
@@ -221,7 +221,7 @@ let reactNodegui = require('neutrino-preset-react-nodegui')
 module.exports = {
    use: [
       reactNodegui({
-      // Inject an application startup launcher. When `false` you need to setup mounting and HMR in your sorce code
+         // Inject an application startup launcher. When `false` you need to setup mounting and HMR in your sorce code
          launcher: true,
 
          // The process title
@@ -230,10 +230,10 @@ module.exports = {
          // Automatically open app on `npm start` and attach it to the compilation process
          open: true,
 
-         // Enables source maps in the production build. Development sourcemaps are not affected and always turned on
+         // Enable source maps in the production build. Development sourcemaps are not affected and always turned on
          sourcemaps: false,
 
-         // Add all necessary polyfills required to support NodeJS
+         // Add all necessary polyfills required to support NodeJS depending on the usage in the code
          polyfills: true
       })
    ]
@@ -298,6 +298,57 @@ reactNodegui({
 
 This turns your application into a regular Node.js application. You will have to manage starting by yourself as it is described in [NodeGUI documentation](https://react.nodegui.org/docs/guides/tutorial).
 
+## Webpack config
+
+Sometime you want to extend Webpack configuration with custom loaders or plugins. This can be done in `.neutrinorc.js` file using [Neutrino API](https://neutrinojs.org/webpack-chain/) also known as [`webpack-chain`](https://www.npmjs.com/package/webpack-chain).
+
+### Plugins
+
+For example, you can add [TypeScript checking](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin)
+
+```js
+let koa = require('neutrino-preset-koa')
+let TsChecker = require('fork-ts-checker-webpack-plugin')
+
+module.exports = {
+   use: [
+      koa(),
+      function (neutrino) {
+         let prodMode = (process.env.NODE_ENV === 'production')
+
+         if (prodMode) return
+
+         neutrino.config
+            .plugin('ts-checker')
+               .use(TsChecker, [{
+                  // options
+               }])
+               .end()
+      }
+   ]
+}
+```
+
+Specifically for this plugin you also need to create `tsconfig.json` file
+
+```json
+{
+   "compilerOptions": {
+      "target": "es2016",
+      "module": "commonjs",
+      "jsx": "react",
+      "strict": true,
+      "alwaysStrict": true,
+      "moduleResolution": "node",
+      "esModuleInterop": true
+   },
+   "include": ["src/**/*"],
+   "exclude": ["node_modules"]
+}
+```
+
+It will enable highlighting in your code editor too.
+
 ## VSCode tips
 
 ### Project settings
@@ -316,7 +367,7 @@ This should prevent building as you type code.
 
 ### Launching in the VSCode Debugger
 
-Visual Studio Code has its own built-in debugger. You may launch and debug your application in the development and production mode using it. Add this configuration:
+Visual Studio Code has its own built-in debugger. You may launch and debug your application in the development and production modes using it. Add this configuration:
 
 #### launch.json
 
@@ -328,26 +379,25 @@ Visual Studio Code has its own built-in debugger. You may launch and debug your 
          "name": "Start",
          "type": "node",
          "request": "launch",
-         "program": "${workspaceRoot}/node_modules/webpack/bin/webpack.js",
-         "args": [
-            "--mode",
-            "development"
-         ],
+         "program": "${workspaceFolder}/node_modules/webpack/bin/webpack.js",
+         "args": ["--mode", "development"],
          "autoAttachChildProcesses": true,
          "internalConsoleOptions": "openOnSessionStart",
+         "skipFiles": ["<node_internals>/**"],
          "sourceMaps": true
       },
       {
         "name": "Open",
         "type": "node",
         "request": "launch",
-        "cwd": "${workspaceRoot}",
-        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/qode",
+        "cwd": "${workspaceFolder}",
+        "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/qode",
         "windows": {
-          "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/qode.cmd"
+          "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/qode.cmd"
         },
         "args": ["./build/index.js"],
         "outputCapture": "std",
+        "skipFiles": ["<node_internals>/**"],
         "sourceMaps": true
       },
       {
@@ -355,20 +405,18 @@ Visual Studio Code has its own built-in debugger. You may launch and debug your 
         "type": "node",
         "request": "attach",
         "port": 9229,
-        "skipFiles": [
-          "<node_internals>/**"
-        ],
+        "skipFiles": ["<node_internals>/**"],
         "sourceMaps": true
       }
    ]
 }
 ```
 
-Use this 3 tasks for different purposes
+Use these 3 tasks for different purposes
 
 - **Start** instead of `npm start`. Builds with live reloading and opens app.
 - **Open** instead of `npm run open`. Opens what was built.
-- **Debug** when want to attach with `--inspect` flag to a manually opened app.
+- **Debug** when want to attach to a manually opened app with `--inspect` flag.
 
 ## CI/CD tips
 
@@ -386,7 +434,7 @@ node_js:
   - "12"
 ```
 
-## Knoledge base
+## Knowledge base
 
 - [Qt Quick QML Types](https://doc.qt.io/qt-5/qtquick-qmlmodule.html)
 - [The Style Sheet Syntax](https://doc.qt.io/qt-5/stylesheet-syntax.html)

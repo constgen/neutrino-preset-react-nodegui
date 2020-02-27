@@ -68,6 +68,8 @@ module.exports = function (customSettings = {}) {
 						].filter(Boolean),
 						cacheDirectory: true,
 						cacheCompression: false,
+						babelrc: false,
+						configFile: false,
 						shouldPrintComment
 					},
 					settings.babel
