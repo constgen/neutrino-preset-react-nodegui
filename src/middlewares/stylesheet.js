@@ -2,16 +2,19 @@ module.exports = function () {
 	return function (neutrino) {
 		neutrino.config
 			.module
-				.rule('style')
+				.rule('stylesheet')
 					.test(/\.css$/i)
-					.use('to-string')
-						.loader(require.resolve('css-to-string-loader'))
+					.use('raw')
+						.loader(require.resolve('raw-loader'))
+						.end()
+					.use('extract')
+						.loader(require.resolve('extract-loader'))
 						.end()
 					.use('css')
 						.loader(require.resolve('css-loader'))
 						.options({
-							import: true,
-							modules: false,
+							import   : true,
+							modules  : false,
 							sourceMap: false
 						})
 						.end()

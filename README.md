@@ -69,7 +69,7 @@ If everything is correct [NodeGUI](https://nodegui.org/) will be compiled on ini
 
 ```bash
 npm install --save @nodegui/nodegui @nodegui/react-nodegui react
-npm install --save-dev neutrino neutrino-preset-react-nodegui webpack webpack-cli
+npm install --save-dev neutrino neutrino-preset-react-nodegui @nodegui/qode webpack webpack-cli
 ```
 
 Now edit your project's `package.json` to add commands for starting and building the application:
