@@ -52,7 +52,8 @@
 		"neutrino": "^9.0.0",
 		"webpack": "^4.0.0",
 		"eslint": "7.8.1",
-		"@constgen/eslint": "2.2.0"
+		"@constgen/eslint": "2.2.0",
+		"@nodegui/nodegui": ">=0.15.0"
 	},
 	"peerDependencies": {
 		"neutrino": "^9.0.0",
