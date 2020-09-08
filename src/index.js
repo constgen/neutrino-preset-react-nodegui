@@ -8,8 +8,6 @@ let sourcemap    = require('@constgen/neutrino-sourcemap')
 let optimization = require('@constgen/neutrino-optimization')
 let mode         = require('@constgen/neutrino-mode')
 let nodeLoader   = require('@constgen/neutrino-node-loader')
-let svg          = require('@constgen/neutrino-svg-loader')
-let image        = require('@constgen/neutrino-image-loader')
 
 let reactNodeguiLauncher = require('./middlewares/react-nodegui-launcher')
 let open                 = require('./middlewares/open')
@@ -18,6 +16,7 @@ let stylesheet           = require('./middlewares/stylesheet')
 let title                = require('./middlewares/title')
 let eslint               = require('./middlewares/eslint')
 let nodegui              = require('./middlewares/nodegui')
+let image                = require('./middlewares/image')
 
 module.exports = function (customSettings = {}) {
 	return function (neutrino) {
@@ -38,7 +37,7 @@ module.exports = function (customSettings = {}) {
 		neutrino.use(nodegui())
 		neutrino.use(nodeLoader())
 		neutrino.use(stylesheet())
-		neutrino.use(image({ limit: false }))
+		neutrino.use(image())
 		if (useLauncher) neutrino.use(reactNodeguiLauncher())
 		neutrino.use(react({
 			node     : NODE_VERSION,
@@ -53,7 +52,6 @@ module.exports = function (customSettings = {}) {
 		neutrino.use(sourcemap({ prod: settings.sourcemaps }))
 		neutrino.use(revision())
 		neutrino.use(optimization({ chunks: false }))
-		neutrino.use(svg())
 
 		// if (settings.open) neutrino.use(open())
 		// neutrino.use(pack({ name: settings.title }))
