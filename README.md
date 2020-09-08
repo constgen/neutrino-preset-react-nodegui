@@ -187,10 +187,6 @@ As `neutrino-preset-react-nodegui` completely controls the launching of your app
 
 Using dynamic imports with `import()` will automatically create split points and hot replace those modules upon modification during development.
 
-## Static assets
-
-If you wish to copy files to the build directory that are not imported from application code, you can place them in a directory within `src` called `static`. All files in this directory will be copied from `src/static` to `build/static`.
-
 ## Styles
 
 As QT uses its [own propriatary stylesheet syntax](https://doc.qt.io/qt-5/stylesheet-syntax.html) this preset supports loading CSS as a string. You can use it like this

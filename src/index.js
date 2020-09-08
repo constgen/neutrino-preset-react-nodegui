@@ -8,7 +8,6 @@ let sourcemap    = require('@constgen/neutrino-sourcemap')
 let optimization = require('@constgen/neutrino-optimization')
 let mode         = require('@constgen/neutrino-mode')
 let nodeLoader   = require('@constgen/neutrino-node-loader')
-let staticFiles  = require('@constgen/neutrino-static-files')
 let svg          = require('@constgen/neutrino-svg-loader')
 let image        = require('@constgen/neutrino-image-loader')
 
@@ -54,7 +53,6 @@ module.exports = function (customSettings = {}) {
 		neutrino.use(sourcemap({ prod: settings.sourcemaps }))
 		neutrino.use(revision())
 		neutrino.use(optimization({ chunks: false }))
-		neutrino.use(staticFiles())
 		neutrino.use(svg())
 
 		// if (settings.open) neutrino.use(open())
