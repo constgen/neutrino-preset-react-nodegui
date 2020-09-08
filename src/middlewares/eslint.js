@@ -8,7 +8,7 @@ module.exports = function () {
 			lintRule.use('eslint').tap(options => deepmerge(options, {
 				baseConfig: {
 					env: {
-						node: true,
+						node    : true,
 						commonjs: true
 					}
 				}

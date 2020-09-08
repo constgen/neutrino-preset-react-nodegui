@@ -1,5 +1,5 @@
-import React from 'react'
-import { Renderer } from '@nodegui/react-nodegui'
+import React from 'react' // eslint-disable-line import/no-unresolved
+import { Renderer } from '@nodegui/react-nodegui' // eslint-disable-line import/no-unresolved
 
 function requireHotEntry () {
 	let HotEntry = require('./hot-entry')
@@ -7,7 +7,7 @@ function requireHotEntry () {
 	return HotEntry.default || HotEntry
 }
 
-Renderer.render(React.createElement(requireHotEntry(), null), {
+Renderer.render(React.createElement(requireHotEntry()), {
 	onRender () {}
 })
 

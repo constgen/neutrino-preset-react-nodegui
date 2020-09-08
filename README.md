@@ -120,7 +120,7 @@ const styleSheet = `
   #header {
     font-size: 34px;
     padding-top: 20px;
-    qproperty-alignment: 'AlignHCenter';
+    qproperty-alignment: "AlignHCenter";
   }
 `
 
@@ -247,7 +247,7 @@ module.exports = {
    use: [
       reactNodegui({
          sourcemaps: true,
-         open: false
+         open      : false
       })
    ]
 }
@@ -304,15 +304,15 @@ For example, you can add [TypeScript checking](https://www.npmjs.com/package/for
 
 ```js
 let reactNodegui = require('neutrino-preset-react-nodegui')
-let TsChecker = require('fork-ts-checker-webpack-plugin')
+let TsChecker    = require('fork-ts-checker-webpack-plugin')
 
 module.exports = {
    use: [
       reactNodegui(),
       function (neutrino) {
-         let prodMode = (process.env.NODE_ENV === 'production')
+         let productionMode = (process.env.NODE_ENV === 'production')
 
-         if (prodMode) return
+         if (productionMode) return
 
          neutrino.config
             .plugin('ts-checker')
