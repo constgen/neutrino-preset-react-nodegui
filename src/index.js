@@ -47,14 +47,13 @@ module.exports = function (customSettings = {}) {
 		neutrino.use(clean())
 		neutrino.use(title({ title: settings.title }))
 		neutrino.use(dependency())
-
-		// neutrino.use(progress({ name: settings.title }))
+		neutrino.use(progress({ name: settings.title }))
 		neutrino.use(sourcemap({ prod: settings.sourcemaps }))
 		neutrino.use(revision())
 		neutrino.use(optimization({ chunks: false }))
 
-		// if (settings.open) neutrino.use(open())
-		// neutrino.use(pack({ name: settings.title }))
+		if (settings.open) neutrino.use(open())
+		neutrino.use(pack({ name: settings.title }))
 		neutrino.use(eslint())
 	}
 }

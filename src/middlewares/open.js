@@ -1,23 +1,27 @@
 let path = require('path')
-let childProcess = require('child_process')
 
-let { qodePath } = require('@nodegui/qode/index')
+let spawn                  = require('cross-spawn')
 let WebpackShellPluginNext = require('webpack-shell-plugin-next')
 
 module.exports = function () {
 	return function (neutrino) {
-		let devMode = (process.env.NODE_ENV === 'development')
-		let otputFileName = Object.keys(neutrino.options.mains).find(Boolean)
-		let outputMainPath = path.resolve(neutrino.options.output, otputFileName)
+		let developmentMode = neutrino.config.get('mode') === 'development'
 
 		function startNodeGui () {
-			let child = childProcess.spawn(qodePath, `--inspect ${outputMainPath}`.split(' '), {
-				stdio: 'inherit',
+			let otputFileName  = Object.keys(neutrino.options.mains).find(Boolean)
+			let outputMainPath = path.resolve(neutrino.options.output, otputFileName)
+			let child          = spawn('node_modules/.bin/qode', ['--inspect', outputMainPath], {
+				cwd        : process.cwd(),
+				stdio      : 'inherit',
 				windowsHide: false
+			}, function (error) {
+				if (error) {
+					console.error(error)
+				}
 			})
 
 			child.on('close', function (code) {
-				process.exit(code) // eslint-disable-line no-process-exit
+				process.exit(code) // eslint-disable-line node/no-process-exit
 			});
 
 			['SIGINT', 'SIGTERM'].forEach(function (signal) {
@@ -30,19 +34,19 @@ module.exports = function () {
 		}
 
 		neutrino.config
-			.when(devMode, function (config) {
+			.when(developmentMode, function (config) {
 				config
 					.plugin('start')
 					.use(WebpackShellPluginNext, [{
 						onBuildEnd: {
-							scripts: [startNodeGui],
+							scripts : [startNodeGui],
 							blocking: false,
 							parallel: true
 						},
-						logging: false,
+						logging     : false,
 						swallowError: true,
-						dev: true,
-						safe: true
+						dev         : true,
+						safe        : true
 					}])
 					.end()
 			})

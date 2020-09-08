@@ -69,7 +69,7 @@ If everything is correct [NodeGUI](https://nodegui.org/) will be compiled on ini
 
 ```bash
 npm install --save @nodegui/nodegui @nodegui/react-nodegui react
-npm install --save-dev neutrino neutrino-preset-react-nodegui @nodegui/qode webpack webpack-cli
+npm install --save-dev neutrino neutrino-preset-react-nodegui webpack webpack-cli
 ```
 
 Now edit your project's `package.json` to add commands for starting and building the application:
@@ -189,7 +189,7 @@ Using dynamic imports with `import()` will automatically create split points and
 
 ## Styles
 
-As QT uses its [own propriatary stylesheet syntax](https://doc.qt.io/qt-5/stylesheet-syntax.html) this preset supports loading CSS as a string. You can use it like this
+As QT uses its [own proprietary stylesheet syntax](https://doc.qt.io/qt-5/stylesheet-syntax.html) this preset supports loading CSS as a string. You can use it like this
 
 ```jsx
 import { View, Text } from '@nodegui/react-nodegui'
@@ -303,12 +303,12 @@ Sometime you want to extend Webpack configuration with custom loaders or plugins
 For example, you can add [TypeScript checking](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin)
 
 ```js
-let koa = require('neutrino-preset-koa')
+let reactNodegui = require('neutrino-preset-react-nodegui')
 let TsChecker = require('fork-ts-checker-webpack-plugin')
 
 module.exports = {
    use: [
-      koa(),
+      reactNodegui(),
       function (neutrino) {
          let prodMode = (process.env.NODE_ENV === 'production')
 
