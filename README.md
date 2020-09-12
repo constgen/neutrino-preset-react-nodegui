@@ -116,6 +116,9 @@ After installing Neutrino and this preset, add a new directory named `src` in th
 import { Text, Window, View } from '@nodegui/react-nodegui'
 import React from 'react'
 
+// import { QIcon } from '@nodegui/nodegui'
+// import logoIcon from './logo.png'
+
 const styleSheet = `
   #header {
     font-size: 34px;
@@ -131,6 +134,8 @@ export default class App extends React.Component {
             windowTitle="Hello world"
             minSize={{ width: 500, height: 300 }}
             styleSheet={styleSheet}
+
+            // windowIcon={new QIcon(logoIcon)}
          >
             <View>
                <Text id="header">I am a C++ programmer</Text>
@@ -219,6 +224,9 @@ module.exports = {
       reactNodegui({
          // Inject an application startup launcher. When `false` you need to setup mounting and HMR in your sorce code
          launcher: true,
+
+         // Clear console on every build
+         clean: true,
 
          // The process title
          title: `${packageJson.name} ${packageJson.version}`,

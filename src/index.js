@@ -25,6 +25,7 @@ module.exports = function (customSettings = {}) {
 		let appName           = `${name} ${version}`
 		let defaultSettings   = {
 			launcher  : true,
+			clean     : true,
 			open      : true,
 			sourcemaps: false,
 			title     : appName,
@@ -41,13 +42,13 @@ module.exports = function (customSettings = {}) {
 		if (useLauncher) neutrino.use(reactNodeguiLauncher())
 		neutrino.use(react({
 			node     : NODE_VERSION,
-			browsers : undefined,
+			browsers : false,
 			polyfills: settings.polyfills
 		}))
 		neutrino.use(clean())
 		neutrino.use(title({ title: settings.title }))
 		neutrino.use(dependency())
-		neutrino.use(progress({ name: settings.title }))
+		neutrino.use(progress({ name: settings.title, clean: settings.clean }))
 		neutrino.use(sourcemap({ prod: settings.sourcemaps }))
 		neutrino.use(revision())
 		neutrino.use(optimization({ chunks: false }))
