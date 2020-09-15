@@ -37,6 +37,7 @@ This preset does all dirty job for setting up Webpack for you. It implements a s
 - Node.js v12+
 - Neutrino v9
 - React NodeGUI v0.4.0+
+- React v16-17
 - Webpack v4
 - CMake v3.1+ (https://cmake.org/install/)
 - 64 bit OS

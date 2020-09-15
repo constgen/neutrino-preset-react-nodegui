@@ -28,30 +28,30 @@
 		"lint": "npm run eslint -- --fix"
 	},
 	"dependencies": {
-		"@neutrinojs/banner": "9.1.0",
-		"@neutrinojs/clean": "9.1.0",
+		"@neutrinojs/banner": "9.4.0",
+		"@neutrinojs/clean": "9.4.0",
 		"@constgen/neutrino-progress": "1.5.0",
-		"@constgen/neutrino-dependency": "1.5.0",
+		"@constgen/neutrino-dependency": "1.9.0",
 		"@constgen/neutrino-revision": "1.7.0",
-		"@constgen/neutrino-react-loader": "1.7.0",
-		"@constgen/neutrino-sourcemap": "1.7.0",
-		"@constgen/neutrino-optimization": "1.6.0",
+		"@constgen/neutrino-react-loader": "1.9.1",
+		"@constgen/neutrino-sourcemap": "1.9.1",
+		"@constgen/neutrino-optimization": "1.9.1",
 		"@constgen/neutrino-mode": "1.5.0",
-		"@constgen/neutrino-node-loader": "1.5.0",
+		"@constgen/neutrino-node-loader": "1.9.0",
 		"@constgen/neutrino-static-files": "1.5.0",
-		"@constgen/neutrino-image-loader": "1.5.0",
+		"@constgen/neutrino-image-loader": "1.9.0",
 		"@nodegui/packer": "1.4.1",
-		"deepmerge": "^1.5.2",
+		"deepmerge": "4.2.2",
 		"webpack-shell-plugin-next": "1.2.0",
 		"cross-spawn": "7.0.3",
 		"raw-loader": "4.0.1",
 		"extract-loader": "5.1.0",
-		"css-loader": "4.2.2"
+		"css-loader": "4.3.0"
 	},
 	"devDependencies": {
 		"neutrino": "^9.0.0",
 		"webpack": "^4.0.0",
-		"eslint": "7.8.1",
+		"eslint": "7.9.0",
 		"@constgen/eslint": "2.2.0",
 		"@nodegui/nodegui": ">=0.15.0"
 	},
@@ -59,7 +59,7 @@
 		"neutrino": "^9.0.0",
 		"webpack": "^4.0.0",
 		"@nodegui/react-nodegui": "^0.4.0",
-		"react": "^16.0.0"
+		"react": "^16.0.0 || ^17.0.0"
 	},
 	"files": [
 		"src",
