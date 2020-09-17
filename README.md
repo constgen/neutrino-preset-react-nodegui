@@ -437,6 +437,9 @@ dist: bionic
 language: node_js
 node_js:
   - "12"
+before_install:
+  # OpenGL
+  - sudo apt-get install libgl1-mesa-dev
 ```
 
 ## Knowledge base
